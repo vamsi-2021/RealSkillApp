@@ -1,7 +1,9 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import {
   Alert,
   Dimensions,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -10,13 +12,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-const CONTENT_WIDTH = Dimensions.get('window').width * 0.6;
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { BetaFlixLogo, Button, TextInput } from '../../components/common';
+import { Button, TextInput } from '../../components/common';
 import { Colors, Typography } from '../../theme';
+import { AuthStackParamList } from '../../navigation/AuthNavigator';
 
-export function LoginScreen() {
+const { width } = Dimensions.get('window');
+const CARD_WIDTH = width >= 768 ? width * 0.6 : width * 0.88;
+
+type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
+
+export function LoginScreen({ navigation }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,7 +42,7 @@ export function LoginScreen() {
   };
 
   const handleSignUp = () => {
-    // TODO: navigate to SignUpScreen
+    navigation.navigate('SignUp');
   };
 
   return (
@@ -52,7 +58,11 @@ export function LoginScreen() {
         >
           <View style={styles.contentCard}>
             <View style={styles.logoContainer}>
-              <BetaFlixLogo />
+              <Image
+                source={require('../../assets/BetaFlix_Logo.png')}
+                style={styles.logo}
+                resizeMode="contain"
+              />
             </View>
 
             <View style={styles.header}>
@@ -91,7 +101,6 @@ export function LoginScreen() {
 
             <Button
               title="Log in"
-              trailingIcon="→"
               loading={loading}
               onPress={handleLogin}
               style={styles.loginButton}
@@ -127,11 +136,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contentCard: {
-    width: CONTENT_WIDTH,
+    width: CARD_WIDTH,
   },
   logoContainer: {
     alignItems: 'center',
     marginBottom: 32,
+  },
+  logo: {
+    width: 260,
+    height: 100,
   },
   header: {
     marginBottom: 28,
