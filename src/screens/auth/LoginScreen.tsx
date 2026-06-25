@@ -14,8 +14,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, TextInput } from '../../components/common';
-import { Colors, Typography } from '../../theme';
+import { useAuth } from '../../context/AuthContext';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import { Colors, Typography } from '../../theme';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = width >= 768 ? width * 0.6 : width * 0.88;
@@ -23,6 +24,7 @@ const CARD_WIDTH = width >= 768 ? width * 0.6 : width * 0.88;
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
 export function LoginScreen({ navigation }: Props) {
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -33,8 +35,11 @@ export function LoginScreen({ navigation }: Props) {
       return;
     }
     setLoading(true);
-    // TODO: wire up auth service
-    setTimeout(() => setLoading(false), 1500);
+    // Simulate auth — replace with real API call
+    setTimeout(() => {
+      setLoading(false);
+      login();
+    }, 1000);
   };
 
   const handleForgotPassword = () => {
