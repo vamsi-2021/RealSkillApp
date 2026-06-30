@@ -3,12 +3,12 @@ import React from 'react';
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
-  PathScreen,
   ProfileScreen,
   ProgressScreen,
   SearchScreen,
 } from '../screens/main';
 import { HomeStack } from './HomeStack';
+import { PathStack } from './PathStack';
 import { Colors } from '../theme';
 import { WIN_WIDTH, IS_TABLET } from '../utils/responsive';
 import { HomeIcon } from '../assets/icons/HomeIcon';
@@ -103,7 +103,7 @@ export function MainNavigator() {
         tabBarInactiveTintColor: 'rgba(255,255,255,0.4)',
       })}>
       <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Path" component={PathScreen} />
+      <Tab.Screen name="Path" component={PathStack} />
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Progress" component={ProgressScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />

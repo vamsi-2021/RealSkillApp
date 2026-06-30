@@ -1,3 +1,4 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import {
   ScrollView,
@@ -7,75 +8,23 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PathStackParamList } from '../../navigation/PathStack';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { IS_TABLET, rf, rs, H_PAD, WIN_WIDTH } from '../../utils/responsive';
+import { IS_TABLET, rf, H_PAD, WIN_WIDTH } from '../../utils/responsive';
+import { TIERS, LEVEL_COLORS, Section, Tier } from '../../data/pathData';
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+// ─── Derived stats ─────────────────────────────────────────────────────────────
 
-type LessonStatus = 'completed' | 'in_progress' | 'locked';
-type TierLevel = 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
-
-interface Lesson {
-  id: string;
-  title: string;
-  status: LessonStatus;
-  progress: number;
-}
-
-interface Tier {
-  id: string;
-  number: string;
-  level: TierLevel;
-  lessons: Lesson[];
-}
-
-const TIERS: Tier[] = [
-  {
-    id: 't1',
-    number: '01',
-    level: 'BEGINNER',
-    lessons: [
-      { id: 'l1', title: 'Workshop Safety & PPE', status: 'completed', progress: 1 },
-      { id: 'l2', title: 'Machine Setup & Polarity', status: 'completed', progress: 1 },
-      { id: 'l3', title: 'Striking & Restarting the Arc', status: 'completed', progress: 1 },
-    ],
-  },
-  {
-    id: 't2',
-    number: '02',
-    level: 'INTERMEDIATE',
-    lessons: [
-      { id: 'l4', title: '1G Flat Stringer Beads', status: 'in_progress', progress: 0.65 },
-      { id: 'l5', title: '2G Horizontal Fillet', status: 'in_progress', progress: 0.28 },
-      { id: 'l6', title: 'Bead Profile & Inspection', status: 'in_progress', progress: 0 },
-    ],
-  },
-  {
-    id: 't3',
-    number: '03',
-    level: 'ADVANCED',
-    lessons: [
-      { id: 'l7', title: '3G Vertical-Up Plate', status: 'locked', progress: 0 },
-      { id: 'l8', title: '4G Overhead Groove', status: 'locked', progress: 0 },
-      { id: 'l9', title: 'AWS D1.1 Plate Certification', status: 'locked', progress: 0 },
-    ],
-  },
-];
-
-const TOTAL_LESSONS = TIERS.reduce((acc, t) => acc + t.lessons.length, 0);
+const TOTAL_SECTIONS = TIERS.reduce((acc, t) => acc + t.sections.length, 0);
 const MASTERED = TIERS.reduce(
-  (acc, t) => acc + t.lessons.filter(l => l.status === 'completed').length,
+  (acc, t) => acc + t.sections.filter(s => s.status === 'completed').length,
   0,
 );
 
-const LEVEL_COLORS: Record<TierLevel, string> = {
-  BEGINNER: '#22C55E',
-  INTERMEDIATE: '#F59E0B',
-  ADVANCED: '#EF4444',
-};
+type Props = NativeStackScreenProps<PathStackParamList, 'PathMain'>;
 
-// ─── Lock icon (View-based, no icon library needed) ───────────────────────────
+// ─── Lock icon (View-based) ───────────────────────────────────────────────────
 
 function LockIcon() {
   return (
@@ -143,9 +92,9 @@ function TierHeader({ tier }: { tier: Tier }) {
   );
 }
 
-// ─── Lesson card ──────────────────────────────────────────────────────────────
+// ─── Section card ─────────────────────────────────────────────────────────────
 
-function StatusIcon({ status }: { status: LessonStatus }) {
+function StatusIcon({ status }: { status: Section['status'] }) {
   if (status === 'completed') {
     return (
       <View style={[styles.iconCircle, styles.iconCompleted]}>
@@ -167,21 +116,30 @@ function StatusIcon({ status }: { status: LessonStatus }) {
   );
 }
 
-function LessonCard({ lesson }: { lesson: Lesson }) {
-  const isLocked = lesson.status === 'locked';
+function SectionCard({
+  section,
+  tierId,
+  onPress,
+}: {
+  section: Section;
+  tierId: string;
+  onPress: (tierId: string, sectionId: string) => void;
+}) {
+  const isLocked = section.status === 'locked';
 
   return (
     <TouchableOpacity
       activeOpacity={isLocked ? 1 : 0.75}
+      onPress={() => !isLocked && onPress(tierId, section.id)}
       style={[styles.lessonCard, isLocked && styles.lessonCardLocked]}>
       <View style={styles.lessonRow}>
-        <StatusIcon status={lesson.status} />
+        <StatusIcon status={section.status} />
 
         <View style={styles.lessonBody}>
           <Text
             style={[styles.lessonTitle, isLocked && styles.lessonTitleLocked]}
             numberOfLines={1}>
-            {lesson.title}
+            {section.title}
           </Text>
 
           {!isLocked && (
@@ -189,7 +147,7 @@ function LessonCard({ lesson }: { lesson: Lesson }) {
               <View
                 style={[
                   styles.progressFill,
-                  { width: `${lesson.progress * 100}%` },
+                  { width: `${section.progress * 100}%` as any },
                 ]}
               />
             </View>
@@ -198,9 +156,7 @@ function LessonCard({ lesson }: { lesson: Lesson }) {
           {isLocked && <View style={styles.lockedSeparator} />}
         </View>
 
-        {!isLocked && (
-          <Text style={styles.chevron}>›</Text>
-        )}
+        {!isLocked && <Text style={styles.chevron}>›</Text>}
       </View>
     </TouchableOpacity>
   );
@@ -208,9 +164,13 @@ function LessonCard({ lesson }: { lesson: Lesson }) {
 
 // ─── PathScreen ───────────────────────────────────────────────────────────────
 
-export function PathScreen() {
+export function PathScreen({ navigation }: Props) {
   const { top, bottom } = useSafeAreaInsets();
   const CONTENT_WIDTH = IS_TABLET ? Math.min(WIN_WIDTH * 0.72, 600) : WIN_WIDTH;
+
+  const handleSectionPress = (tierId: string, sectionId: string) => {
+    navigation.navigate('TierDetail', { tierId, sectionId });
+  };
 
   return (
     <View style={styles.screen}>
@@ -232,7 +192,7 @@ export function PathScreen() {
           <Text style={styles.heroTitle}>Your route to AWS-certified.</Text>
 
           <View style={styles.statsRow}>
-            <StatCard label="MASTERED" value={`${MASTERED} / ${TOTAL_LESSONS}`} />
+            <StatCard label="MASTERED" value={`${MASTERED} / ${TOTAL_SECTIONS}`} />
             <StatCard label="NEXT CERT" value="42d" />
           </View>
         </View>
@@ -243,8 +203,13 @@ export function PathScreen() {
             <View key={tier.id} style={tierIdx > 0 ? styles.tierSpacing : undefined}>
               <TierHeader tier={tier} />
               <View style={styles.lessonsContainer}>
-                {tier.lessons.map(lesson => (
-                  <LessonCard key={lesson.id} lesson={lesson} />
+                {tier.sections.map(section => (
+                  <SectionCard
+                    key={section.id}
+                    section={section}
+                    tierId={tier.id}
+                    onPress={handleSectionPress}
+                  />
                 ))}
               </View>
             </View>
@@ -350,7 +315,7 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
 
-  // ── Lesson cards ──
+  // ── Section cards ──
   lessonsContainer: {
     gap: 10,
   },
@@ -406,7 +371,7 @@ const styles = StyleSheet.create({
     marginLeft: 2,
   },
 
-  // ── Lesson body ──
+  // ── Section body ──
   lessonBody: {
     flex: 1,
     gap: 8,
