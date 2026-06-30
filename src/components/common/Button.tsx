@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Colors } from '../../theme/colors';
 import { Typography } from '../../theme/typography';
+import { rf } from '../../utils/responsive';
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   icon: {
-    fontSize: 16,
+    fontSize: rf(16),
     color: Colors.white,
   },
   secondaryText: {

@@ -20,8 +20,8 @@ function fontScale(w: number): number {
   if (w <= 430) { return 1.00; }
   if (w <= 600) { return 1.04; }
   if (w <= 744) { return 1.10; }
-  if (w <= 900) { return 1.15; }
-  return 1.20;
+  if (w <= 900) { return 1.24; }
+  return 1.32;
 }
 
 function spaceScale(w: number): number {

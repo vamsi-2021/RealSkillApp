@@ -16,6 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../navigation/RootNavigator';
 import { Colors } from '../../theme';
 import { getLesson, LessonData } from '../../data/lessonData';
+import { rf, rs } from '../../utils/responsive';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AIChat'>;
 
@@ -82,10 +83,10 @@ function buildGreeting(lesson: LessonData | null): Message {
 function MicIcon() {
   const C = 'rgba(255,255,255,0.88)';
   return (
-    <View style={{ alignItems: 'center', width: 16, height: 22 }}>
-      <View style={{ width: 12, height: 14, borderRadius: 6, borderWidth: 2, borderColor: C }} />
-      <View style={{ marginTop: 2, width: 2, height: 4, backgroundColor: C, borderRadius: 1 }} />
-      <View style={{ width: 12, height: 2, borderRadius: 1, backgroundColor: C }} />
+    <View style={{ alignItems: 'center', width: rs(16), height: rs(22) }}>
+      <View style={{ width: rs(12), height: rs(14), borderRadius: rs(6), borderWidth: 2, borderColor: C }} />
+      <View style={{ marginTop: 2, width: rs(2), height: rs(4), backgroundColor: C, borderRadius: 1 }} />
+      <View style={{ width: rs(12), height: rs(2), borderRadius: 1, backgroundColor: C }} />
     </View>
   );
 }
@@ -296,9 +297,9 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   backBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: rs(36),
+    height: rs(36),
+    borderRadius: rs(18),
     backgroundColor: 'rgba(255,255,255,0.09)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -306,15 +307,15 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.15)',
   },
   backArrow: {
-    fontSize: 26,
+    fontSize: rf(26),
     color: '#fff',
-    lineHeight: 28,
+    lineHeight: rf(28),
     marginTop: -2,
   },
   aiAvatar: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
+    width: rs(42),
+    height: rs(42),
+    borderRadius: rs(21),
     backgroundColor: Colors.accent,
     alignItems: 'center',
     justifyContent: 'center',
@@ -325,22 +326,22 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   aiAvatarIcon: {
-    fontSize: 18,
+    fontSize: rf(18),
     color: '#fff',
-    lineHeight: 20,
+    lineHeight: rf(20),
   },
   headerText: {
     flex: 1,
     gap: 2,
   },
   headerTitle: {
-    fontSize: 17,
+    fontSize: rf(17),
     fontWeight: '700',
     color: '#fff',
     letterSpacing: -0.2,
   },
   headerSub: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '600',
     color: 'rgba(255,255,255,0.42)',
     letterSpacing: 1.2,
@@ -384,10 +385,10 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
   },
   bubbleText: {
-    fontSize: 15,
+    fontSize: rf(15),
     fontWeight: '400',
     color: '#fff',
-    lineHeight: 23,
+    lineHeight: rf(23),
     letterSpacing: -0.1,
   },
   bubbleTextUser: {
@@ -434,7 +435,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.18)',
   },
   chipText: {
-    fontSize: 13,
+    fontSize: rf(13),
     fontWeight: '600',
     color: '#fff',
     letterSpacing: -0.1,
@@ -453,13 +454,13 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgba(255,255,255,0.14)',
     paddingHorizontal: 18,
-    fontSize: 15,
+    fontSize: rf(15),
     color: '#fff',
   },
   micBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: rs(48),
+    height: rs(48),
+    borderRadius: rs(24),
     backgroundColor: 'rgba(255,255,255,0.09)',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgba(255,255,255,0.14)',
@@ -467,9 +468,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   sendBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: rs(48),
+    height: rs(48),
+    borderRadius: rs(24),
     backgroundColor: Colors.accent,
     alignItems: 'center',
     justifyContent: 'center',
@@ -485,10 +486,10 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   sendGlyph: {
-    fontSize: 20,
+    fontSize: rf(20),
     fontWeight: '700',
     color: '#fff',
-    lineHeight: 22,
+    lineHeight: rf(22),
     marginTop: -1,
   },
 });

@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PathStackParamList } from '../../navigation/PathStack';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { IS_TABLET, rf, H_PAD, WIN_WIDTH } from '../../utils/responsive';
+import { rf, rs, H_PAD } from '../../utils/responsive';
 import { TIERS, LEVEL_COLORS, Section, Tier } from '../../data/pathData';
 
 // ─── Derived stats ─────────────────────────────────────────────────────────────
@@ -43,27 +43,27 @@ const lockStyles = StyleSheet.create({
     gap: 0,
   },
   shackle: {
-    width: 12,
-    height: 8,
+    width: rs(12),
+    height: rs(8),
     borderWidth: 2.5,
     borderColor: 'rgba(255,255,255,0.28)',
     borderBottomWidth: 0,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
+    borderTopLeftRadius: rs(6),
+    borderTopRightRadius: rs(6),
     marginBottom: -1,
   },
   body: {
-    width: 20,
-    height: 14,
+    width: rs(20),
+    height: rs(14),
     backgroundColor: 'rgba(255,255,255,0.22)',
-    borderRadius: 4,
+    borderRadius: rs(4),
     alignItems: 'center',
     justifyContent: 'center',
   },
   keyhole: {
-    width: 4,
-    height: 4,
-    borderRadius: 2,
+    width: rs(4),
+    height: rs(4),
+    borderRadius: rs(2),
     backgroundColor: 'rgba(0,0,0,0.4)',
   },
 });
@@ -166,7 +166,6 @@ function SectionCard({
 
 export function PathScreen({ navigation }: Props) {
   const { top, bottom } = useSafeAreaInsets();
-  const CONTENT_WIDTH = IS_TABLET ? Math.min(WIN_WIDTH * 0.72, 600) : WIN_WIDTH;
 
   const handleSectionPress = (tierId: string, sectionId: string) => {
     navigation.navigate('TierDetail', { tierId, sectionId });
@@ -181,13 +180,12 @@ export function PathScreen({ navigation }: Props) {
           {
             paddingTop: top + 24,
             paddingBottom: TAB_BAR_CONTENT_HEIGHT + bottom + 24,
-            alignItems: IS_TABLET ? 'center' : undefined,
           },
         ]}
         showsVerticalScrollIndicator={false}>
 
         {/* ── Header ── */}
-        <View style={[styles.header, { width: IS_TABLET ? CONTENT_WIDTH : undefined }]}>
+        <View style={styles.header}>
           <Text style={styles.breadcrumb}>SKILL PATH · STRUCTURAL SMAW WELDER</Text>
           <Text style={styles.heroTitle}>Your route to AWS-certified.</Text>
 
@@ -198,7 +196,7 @@ export function PathScreen({ navigation }: Props) {
         </View>
 
         {/* ── Tiers ── */}
-        <View style={[styles.tiersContainer, { width: IS_TABLET ? CONTENT_WIDTH : undefined }]}>
+        <View style={styles.tiersContainer}>
           {TIERS.map((tier, tierIdx) => (
             <View key={tier.id} style={tierIdx > 0 ? styles.tierSpacing : undefined}>
               <TierHeader tier={tier} />
@@ -242,7 +240,7 @@ const styles = StyleSheet.create({
     marginBottom: 28,
   },
   breadcrumb: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.4,
@@ -273,7 +271,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   statLabel: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.2,
@@ -297,7 +295,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   tierNumber: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 2,
@@ -309,7 +307,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.12)',
   },
   tierLevel: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     letterSpacing: 1.5,
     flexShrink: 0,
@@ -340,9 +338,9 @@ const styles = StyleSheet.create({
 
   // ── Status icons ──
   iconCircle: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: rs(44),
+    height: rs(44),
+    borderRadius: rs(22),
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
@@ -359,15 +357,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.05)',
   },
   iconCheckmark: {
-    fontSize: 18,
+    fontSize: rf(18),
     fontWeight: '700',
     color: '#fff',
-    lineHeight: 20,
+    lineHeight: rf(20),
   },
   iconPlay: {
-    fontSize: 14,
+    fontSize: rf(14),
     color: '#fff',
-    lineHeight: 16,
+    lineHeight: rf(16),
     marginLeft: 2,
   },
 
@@ -407,9 +405,9 @@ const styles = StyleSheet.create({
 
   // ── Chevron ──
   chevron: {
-    fontSize: 22,
+    fontSize: rf(22),
     color: 'rgba(255,255,255,0.3)',
-    lineHeight: 24,
+    lineHeight: rf(24),
     flexShrink: 0,
     marginRight: 2,
   },

@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, TextInput } from '../../components/common';
 import { Colors, Typography } from '../../theme';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import { rf, rs } from '../../utils/responsive';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = width >= 768 ? width * 0.6 : width * 0.88;
@@ -195,8 +196,8 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   logo: {
-    width: 260,
-    height: 100,
+    width: rs(260),
+    height: rs(100),
   },
   header: {
     marginBottom: 28,
@@ -216,9 +217,9 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   checkbox: {
-    width: 20,
-    height: 20,
-    borderRadius: 5,
+    width: rs(20),
+    height: rs(20),
+    borderRadius: rs(5),
     borderWidth: 1.5,
     borderColor: Colors.border,
     backgroundColor: Colors.inputBackground,
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
   },
   checkmark: {
-    fontSize: 12,
+    fontSize: rf(12),
     color: Colors.white,
     fontWeight: '700',
   },

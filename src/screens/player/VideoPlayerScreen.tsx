@@ -13,7 +13,7 @@ import { HomeStackParamList } from '../../navigation/HomeStack';
 import { buildTabBarStyle } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
 import { getLesson } from '../../data/lessonData';
-import { WIN_WIDTH, WIN_HEIGHT } from '../../utils/responsive';
+import { rf, rs, WIN_WIDTH, WIN_HEIGHT } from '../../utils/responsive';
 
 const SW = WIN_WIDTH;
 const SH = WIN_HEIGHT;
@@ -46,8 +46,8 @@ function PauseIcon() {
 
 function FullscreenIcon() {
   const C = 'rgba(255,255,255,0.88)';
-  const W = 2;
-  const L = 8;
+  const W = rs(2);
+  const L = rs(8);
   return (
     <View style={styles.fsIcon}>
       {/* TL */}
@@ -81,25 +81,25 @@ function VolumeIcon({ muted }: { muted: boolean }) {
       <View style={styles.volIcon}>
         {/* Speaker body */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-          <View style={{ width: 6, height: 10, backgroundColor: C, borderRadius: 1 }} />
-          <View style={{ width: 0, height: 0, borderTopWidth: 7, borderBottomWidth: 7, borderLeftWidth: 7, borderTopColor: 'transparent', borderBottomColor: 'transparent', borderLeftColor: C }} />
+          <View style={{ width: rs(6), height: rs(10), backgroundColor: C, borderRadius: 1 }} />
+          <View style={{ width: 0, height: 0, borderTopWidth: rs(7), borderBottomWidth: rs(7), borderLeftWidth: rs(7), borderTopColor: 'transparent', borderBottomColor: 'transparent', borderLeftColor: C }} />
         </View>
         {/* X slash */}
         <View style={{ position: 'absolute', right: 0, top: 3 }}>
-          <Text style={{ fontSize: 12, color: C, fontWeight: '800', lineHeight: 14 }}>✕</Text>
+          <Text style={{ fontSize: rf(12), color: C, fontWeight: '800', lineHeight: rf(14) }}>✕</Text>
         </View>
       </View>
     );
   }
   return (
     <View style={styles.volIcon}>
-      <View style={{ width: 6, height: 10, backgroundColor: C, borderRadius: 1 }} />
-      <View style={{ width: 0, height: 0, borderTopWidth: 7, borderBottomWidth: 7, borderLeftWidth: 7, borderTopColor: 'transparent', borderBottomColor: 'transparent', borderLeftColor: C }} />
+      <View style={{ width: rs(6), height: rs(10), backgroundColor: C, borderRadius: 1 }} />
+      <View style={{ width: 0, height: 0, borderTopWidth: rs(7), borderBottomWidth: rs(7), borderLeftWidth: rs(7), borderTopColor: 'transparent', borderBottomColor: 'transparent', borderLeftColor: C }} />
       {/* Sound waves */}
       <View style={{ gap: 3, justifyContent: 'center' }}>
-        <View style={{ width: 4, height: 1.5, backgroundColor: C, borderRadius: 1, opacity: 0.7 }} />
-        <View style={{ width: 6, height: 1.5, backgroundColor: C, borderRadius: 1 }} />
-        <View style={{ width: 4, height: 1.5, backgroundColor: C, borderRadius: 1, opacity: 0.7 }} />
+        <View style={{ width: rs(4), height: rs(1.5), backgroundColor: C, borderRadius: 1, opacity: 0.7 }} />
+        <View style={{ width: rs(6), height: rs(1.5), backgroundColor: C, borderRadius: 1 }} />
+        <View style={{ width: rs(4), height: rs(1.5), backgroundColor: C, borderRadius: 1, opacity: 0.7 }} />
       </View>
     </View>
   );
@@ -478,9 +478,9 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   backBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: rs(40),
+    height: rs(40),
+    borderRadius: rs(20),
     backgroundColor: 'rgba(0,0,0,0.45)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -489,9 +489,9 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   backArrow: {
-    fontSize: 20,
+    fontSize: rf(20),
     color: '#fff',
-    lineHeight: 22,
+    lineHeight: rf(22),
     marginTop: -1,
   },
   titleBlock: {
@@ -499,20 +499,20 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   topTitle: {
-    fontSize: 14,
+    fontSize: rf(14),
     fontWeight: '700',
     color: '#fff',
     letterSpacing: -0.1,
   },
   topMeta: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '500',
     color: 'rgba(255,255,255,0.52)',
     letterSpacing: 0.3,
   },
   topActionBtn: {
-    width: 40,
-    height: 40,
+    width: rs(40),
+    height: rs(40),
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
@@ -523,8 +523,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 3,
-    width: 28,
-    height: 20,
+    width: rs(28),
+    height: rs(20),
   },
 
   // ── Center controls ──
@@ -544,20 +544,20 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   skipArrow: {
-    fontSize: 34,
+    fontSize: rf(34),
     color: 'rgba(255,255,255,0.88)',
-    lineHeight: 36,
+    lineHeight: rf(36),
   },
   skipLabel: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.75)',
     letterSpacing: 0.3,
   },
   playPauseBtn: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+    width: rs(72),
+    height: rs(72),
+    borderRadius: rs(36),
     borderWidth: 2.5,
     borderColor: 'rgba(255,255,255,0.88)',
     backgroundColor: 'rgba(255,255,255,0.12)',
@@ -565,9 +565,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   playGlyph: {
-    fontSize: 28,
+    fontSize: rf(28),
     color: '#fff',
-    lineHeight: 30,
+    lineHeight: rf(30),
     marginLeft: 5,
   },
   pauseWrap: {
@@ -577,9 +577,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pauseBar: {
-    width: 5,
-    height: 26,
-    borderRadius: 3,
+    width: rs(5),
+    height: rs(26),
+    borderRadius: rs(3),
     backgroundColor: '#fff',
   },
 
@@ -641,7 +641,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   timeText: {
-    fontSize: 12,
+    fontSize: rf(12),
     fontWeight: '600',
     color: 'rgba(255,255,255,0.82)',
     letterSpacing: 0.3,
@@ -661,19 +661,19 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.32)',
   },
   qualityText: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '700',
     color: '#fff',
     letterSpacing: 0.5,
   },
   fsBtn: {
-    width: 36,
-    height: 36,
+    width: rs(36),
+    height: rs(36),
     alignItems: 'center',
     justifyContent: 'center',
   },
   fsIcon: {
-    width: 22,
-    height: 22,
+    width: rs(22),
+    height: rs(22),
   },
 });

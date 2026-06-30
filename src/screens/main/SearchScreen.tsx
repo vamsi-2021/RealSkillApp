@@ -11,7 +11,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { IS_TABLET, rf, rs, H_PAD, WIN_WIDTH } from '../../utils/responsive';
+import { rf, rs, H_PAD } from '../../utils/responsive';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -104,22 +104,22 @@ function MagnifyIcon({ color = 'rgba(255,255,255,0.35)' }: { color?: string }) {
 }
 
 const magStyles = StyleSheet.create({
-  root: { width: 18, height: 18 },
+  root: { width: rs(18), height: rs(18) },
   circle: {
     position: 'absolute',
     top: 0,
     left: 0,
-    width: 12,
-    height: 12,
-    borderRadius: 6,
+    width: rs(12),
+    height: rs(12),
+    borderRadius: rs(6),
     borderWidth: 2,
   },
   handle: {
     position: 'absolute',
     bottom: 0,
     right: 1,
-    width: 2,
-    height: 8,
+    width: rs(2),
+    height: rs(8),
     borderRadius: 1,
     transform: [{ rotate: '-45deg' }],
   },
@@ -181,8 +181,6 @@ export function SearchScreen() {
   const sectionLabel =
     query.trim() ? `RESULTS FOR "${query.trim().toUpperCase()}"` : 'TRENDING IN YOUR SHOP';
 
-  const CONTENT_WIDTH = IS_TABLET ? Math.min(WIN_WIDTH * 0.72, 640) : WIN_WIDTH;
-
   return (
     <View style={styles.screen}>
       {/* ── Sticky header (title + search + chips) ── */}
@@ -191,8 +189,6 @@ export function SearchScreen() {
           styles.stickyHeader,
           {
             paddingTop: top + 20,
-            width: IS_TABLET ? CONTENT_WIDTH : undefined,
-            alignSelf: IS_TABLET ? 'center' : undefined,
           },
         ]}>
         <Text style={styles.pageTitle}>Search the library</Text>
@@ -245,8 +241,6 @@ export function SearchScreen() {
           styles.list,
           {
             paddingBottom: TAB_BAR_CONTENT_HEIGHT + bottom + 24,
-            width: IS_TABLET ? CONTENT_WIDTH : undefined,
-            alignSelf: IS_TABLET ? 'center' : undefined,
           },
         ]}
         ListHeaderComponent={
@@ -310,7 +304,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    fontSize: 15,
+    fontSize: rf(15),
     color: '#fff',
     padding: 0,
     margin: 0,
@@ -338,7 +332,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.accent,
   },
   chipText: {
-    fontSize: 13,
+    fontSize: rf(13),
     fontWeight: '600',
     color: 'rgba(255,255,255,0.7)',
     letterSpacing: 0.1,
@@ -354,7 +348,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   sectionLabel: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.8,
@@ -416,7 +410,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
   },
   cardMeta: {
-    fontSize: 10.5,
+    fontSize: rf(10.5),
     fontWeight: '600',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 0.6,
@@ -429,16 +423,16 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   emptyIcon: {
-    fontSize: 40,
+    fontSize: rf(40),
     color: 'rgba(255,255,255,0.15)',
   },
   emptyTitle: {
-    fontSize: 17,
+    fontSize: rf(17),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.4)',
   },
   emptyBody: {
-    fontSize: 14,
+    fontSize: rf(14),
     color: 'rgba(255,255,255,0.25)',
     textAlign: 'center',
     paddingHorizontal: 40,

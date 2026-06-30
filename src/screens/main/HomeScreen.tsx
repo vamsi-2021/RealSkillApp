@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { HomeStackParamList } from '../../navigation/HomeStack';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { IS_TABLET, rf, WIN_WIDTH, WIN_HEIGHT } from '../../utils/responsive';
+import { IS_TABLET, rf, rs, WIN_WIDTH, WIN_HEIGHT } from '../../utils/responsive';
 
 const SCREEN_WIDTH = WIN_WIDTH;
 const SCREEN_HEIGHT = WIN_HEIGHT;
@@ -197,14 +197,9 @@ function FeedCard({ item, index, total, topInset, bottomInset }: FeedCardProps) 
   const TAB_BAR_HEIGHT = TAB_BAR_CONTENT_HEIGHT + bottomInset;
   const CTA_BOTTOM = TAB_BAR_HEIGHT + 16;
   const TEXT_BOTTOM = CTA_BOTTOM + CTA_HEIGHT + 14;
-  const cardWidth = IS_TABLET ? SCREEN_WIDTH * 0.55 : SCREEN_WIDTH;
 
   return (
-    <View
-      style={[
-        styles.card,
-        IS_TABLET && { width: cardWidth, alignSelf: 'center' },
-      ]}>
+    <View style={styles.card}>
       {/* ── Background ── */}
       <View style={[styles.background, { backgroundColor: item.backgroundColor }]}>
         <View style={[styles.bgAccent, { backgroundColor: item.accentColor }]} />
@@ -425,7 +420,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   counter: {
-    fontSize: 13,
+    fontSize: rf(13),
     fontWeight: '600',
     color: 'rgba(255,255,255,0.8)',
     letterSpacing: 1.5,
@@ -449,7 +444,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.accent,
   },
   liveText: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: '#fff',
     letterSpacing: 1,
@@ -467,9 +462,9 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   actionBtnCircle: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: rs(48),
+    height: rs(48),
+    borderRadius: rs(24),
     backgroundColor: 'rgba(255,255,255,0.12)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -489,16 +484,16 @@ const styles = StyleSheet.create({
     borderColor: Colors.accent,
   },
   actionBtnIcon: {
-    fontSize: 20,
+    fontSize: rf(20),
     color: '#fff',
-    lineHeight: 22,
+    lineHeight: rf(22),
   },
   actionBtnIconGreen: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: rf(18),
   },
   actionBtnLabel: {
-    fontSize: 9,
+    fontSize: rf(9),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.7)',
     letterSpacing: 0.8,
@@ -538,13 +533,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   categoryChipText: {
-    fontSize: 9,
+    fontSize: rf(9),
     fontWeight: '800',
     color: '#fff',
     letterSpacing: 1,
   },
   levelText: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '600',
     letterSpacing: 0.8,
   },
@@ -556,7 +551,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.3,
   },
   meta: {
-    fontSize: 12,
+    fontSize: rf(12),
     fontWeight: '500',
     color: 'rgba(255,255,255,0.55)',
     letterSpacing: 0.3,
@@ -582,9 +577,9 @@ const styles = StyleSheet.create({
     // height is injected inline so it responds to IS_TABLET
   },
   ctaResumeIcon: {
-    fontSize: 14,
+    fontSize: rf(14),
     color: '#0A0A14',
-    lineHeight: 16,
+    lineHeight: rf(16),
   },
   ctaResumeText: {
     fontSize: rf(16),
@@ -605,9 +600,9 @@ const styles = StyleSheet.create({
     // height is injected inline
   },
   ctaQuizIcon: {
-    fontSize: 15,
+    fontSize: rf(15),
     color: '#fff',
-    lineHeight: 17,
+    lineHeight: rf(17),
   },
   ctaQuizText: {
     fontSize: rf(16),
@@ -620,9 +615,9 @@ const styles = StyleSheet.create({
   floatingAI: {
     position: 'absolute',
     left: 18,
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+    width: rs(52),
+    height: rs(52),
+    borderRadius: rs(26),
     backgroundColor: Colors.accent,
     alignItems: 'center',
     justifyContent: 'center',
@@ -633,7 +628,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   floatingAIIcon: {
-    fontSize: 22,
+    fontSize: rf(22),
     color: '#fff',
   },
 });

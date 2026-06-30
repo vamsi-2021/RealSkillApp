@@ -8,7 +8,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { IS_TABLET, rf, rs, H_PAD, WIN_WIDTH } from '../../utils/responsive';
+import { rf, rs, H_PAD } from '../../utils/responsive';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -172,7 +172,7 @@ const chartStyles = StyleSheet.create({
   },
   dayLabel: {
     marginTop: 8,
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '600',
     color: 'rgba(255,255,255,0.35)',
     textAlign: 'center',
@@ -224,15 +224,15 @@ const certBadgeStyles = StyleSheet.create({
     position: 'absolute',
     right: 16,
     top: 16,
-    width: 72,
-    height: 88,
+    width: rs(72),
+    height: rs(88),
     alignItems: 'center',
     opacity: 0.18,
   },
   circle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: rs(60),
+    height: rs(60),
+    borderRadius: rs(30),
     borderWidth: 5,
     borderColor: Colors.accent,
     backgroundColor: 'transparent',
@@ -240,21 +240,21 @@ const certBadgeStyles = StyleSheet.create({
   ribbonLeft: {
     position: 'absolute',
     bottom: 0,
-    left: 6,
-    width: 22,
-    height: 34,
+    left: rs(6),
+    width: rs(22),
+    height: rs(34),
     backgroundColor: Colors.accent,
-    borderBottomLeftRadius: 4,
+    borderBottomLeftRadius: rs(4),
     transform: [{ skewX: '-8deg' }],
   },
   ribbonRight: {
     position: 'absolute',
     bottom: 0,
-    right: 6,
-    width: 22,
-    height: 34,
+    right: rs(6),
+    width: rs(22),
+    height: rs(34),
     backgroundColor: Colors.accent,
-    borderBottomRightRadius: 4,
+    borderBottomRightRadius: rs(4),
     transform: [{ skewX: '8deg' }],
   },
 });
@@ -269,7 +269,6 @@ function SectionLabel({ text }: { text: string }) {
 
 export function ProgressScreen() {
   const { top, bottom } = useSafeAreaInsets();
-  const CONTENT_WIDTH = IS_TABLET ? Math.min(WIN_WIDTH * 0.72, 640) : undefined;
 
   return (
     <View style={styles.screen}>
@@ -280,8 +279,6 @@ export function ProgressScreen() {
           {
             paddingTop: top + 24,
             paddingBottom: TAB_BAR_CONTENT_HEIGHT + bottom + 24,
-            width: CONTENT_WIDTH,
-            alignSelf: IS_TABLET ? 'center' : undefined,
           },
         ]}
         showsVerticalScrollIndicator={false}>
@@ -343,7 +340,7 @@ const styles = StyleSheet.create({
 
   // ── Header ──
   breadcrumb: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.8,
@@ -359,7 +356,7 @@ const styles = StyleSheet.create({
 
   // ── Section label ──
   sectionLabel: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.8,
@@ -395,11 +392,11 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   statIcon: {
-    fontSize: 14,
-    lineHeight: 16,
+    fontSize: rf(14),
+    lineHeight: rf(16),
   },
   statLabel: {
-    fontSize: 9.5,
+    fontSize: rf(9.5),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.2,
@@ -412,7 +409,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.5,
   },
   statSub: {
-    fontSize: 12,
+    fontSize: rf(12),
     color: 'rgba(255,255,255,0.38)',
     fontWeight: '500',
   },
@@ -445,7 +442,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.1,
   },
   techniqueScore: {
-    fontSize: 14,
+    fontSize: rf(14),
     fontWeight: '700',
     color: AMBER,
     letterSpacing: 0.2,
@@ -478,7 +475,7 @@ const styles = StyleSheet.create({
     paddingRight: 80,
   },
   certStatus: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '800',
     color: Colors.accent,
     letterSpacing: 1.8,
@@ -491,7 +488,7 @@ const styles = StyleSheet.create({
     lineHeight: rf(26),
   },
   certSub: {
-    fontSize: 13,
+    fontSize: rf(13),
     color: 'rgba(255,255,255,0.45)',
     fontWeight: '500',
   },

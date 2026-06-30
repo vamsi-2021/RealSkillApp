@@ -14,7 +14,7 @@ import { getQuiz } from '../../data/quizData';
 import { HomeStackParamList } from '../../navigation/HomeStack';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { IS_TABLET, rf, rs, H_PAD, WIN_WIDTH } from '../../utils/responsive';
+import { rf, rs, H_PAD } from '../../utils/responsive';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'Quiz'>;
 
@@ -198,8 +198,6 @@ export function QuizScreen({ route, navigation }: Props) {
     outputRange: [FOOTER_H, 0],
   });
 
-  const CONTENT_WIDTH = IS_TABLET ? Math.min(WIN_WIDTH * 0.68, 600) : undefined;
-
   return (
     <View style={styles.screen}>
 
@@ -209,8 +207,6 @@ export function QuizScreen({ route, navigation }: Props) {
           styles.header,
           {
             paddingTop: top + (Platform.OS === 'android' ? 8 : 10),
-            width: CONTENT_WIDTH,
-            alignSelf: IS_TABLET ? 'center' : undefined,
           },
         ]}>
         <TouchableOpacity
@@ -231,14 +227,7 @@ export function QuizScreen({ route, navigation }: Props) {
       </View>
 
       {/* ── Progress segments ── */}
-      <View
-        style={[
-          styles.segmentsRow,
-          {
-            width: CONTENT_WIDTH,
-            alignSelf: IS_TABLET ? 'center' : undefined,
-          },
-        ]}>
+      <View style={styles.segmentsRow}>
         {quiz.questions.map((_, i) => (
           <View
             key={i}
@@ -261,8 +250,6 @@ export function QuizScreen({ route, navigation }: Props) {
           styles.scrollContent,
           {
             paddingBottom: answered ? FOOTER_H + 16 : 32,
-            width: CONTENT_WIDTH,
-            alignSelf: IS_TABLET ? 'center' : undefined,
           },
         ]}
         showsVerticalScrollIndicator={false}
@@ -310,8 +297,6 @@ export function QuizScreen({ route, navigation }: Props) {
           {
             paddingBottom: TAB_BAR_CONTENT_HEIGHT + bottom + 12,
             transform: [{ translateY: footerTranslate }],
-            width: CONTENT_WIDTH,
-            alignSelf: IS_TABLET ? 'center' : undefined,
           },
         ]}
         pointerEvents={answered ? 'auto' : 'none'}>
@@ -356,18 +341,18 @@ const styles = StyleSheet.create({
     paddingBottom: 14,
   },
   backBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: rs(40),
+    height: rs(40),
+    borderRadius: rs(20),
     backgroundColor: 'rgba(255,255,255,0.08)',
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
   },
   backArrow: {
-    fontSize: 18,
+    fontSize: rf(18),
     color: '#fff',
-    lineHeight: 20,
+    lineHeight: rf(20),
     marginTop: Platform.OS === 'android' ? -2 : 0,
   },
   headerMeta: {
@@ -375,13 +360,13 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   headerBreadcrumb: {
-    fontSize: 9.5,
+    fontSize: rf(9.5),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.4,
   },
   headerTitle: {
-    fontSize: 13,
+    fontSize: rf(13),
     fontWeight: '700',
     color: '#fff',
     letterSpacing: -0.1,
@@ -420,7 +405,7 @@ const styles = StyleSheet.create({
 
   // ── Counter + question ──
   counter: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.8,
@@ -465,9 +450,9 @@ const styles = StyleSheet.create({
 
   // Letter badge
   letterBadge: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: rs(32),
+    height: rs(32),
+    borderRadius: rs(16),
     backgroundColor: 'rgba(255,255,255,0.08)',
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.14)',
@@ -484,7 +469,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(239,68,68,0.5)',
   },
   letterText: {
-    fontSize: 12,
+    fontSize: rf(12),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.7)',
   },
@@ -512,9 +497,9 @@ const styles = StyleSheet.create({
 
   // Feedback icon (right side)
   feedbackCircle: {
-    width: 26,
-    height: 26,
-    borderRadius: 13,
+    width: rs(26),
+    height: rs(26),
+    borderRadius: rs(13),
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
@@ -530,10 +515,10 @@ const styles = StyleSheet.create({
     borderColor: RED,
   },
   feedbackGlyph: {
-    fontSize: 12,
+    fontSize: rf(12),
     fontWeight: '800',
     color: '#fff',
-    lineHeight: 14,
+    lineHeight: rf(14),
   },
 
   // ── Explanation panel ──
@@ -557,9 +542,9 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   explanationBadge: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: rs(20),
+    height: rs(20),
+    borderRadius: rs(10),
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1.5,
@@ -574,13 +559,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(239,68,68,0.2)',
   },
   explanationBadgeGlyph: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '800',
     color: '#fff',
-    lineHeight: 12,
+    lineHeight: rf(12),
   },
   explanationTitle: {
-    fontSize: 14,
+    fontSize: rf(14),
     fontWeight: '800',
     letterSpacing: 0.1,
   },
@@ -602,7 +587,7 @@ const styles = StyleSheet.create({
     borderTopColor: 'rgba(255,255,255,0.12)',
   },
   completionText: {
-    fontSize: 13,
+    fontSize: rf(13),
     color: 'rgba(255,255,255,0.55)',
     fontWeight: '600',
   },
@@ -634,7 +619,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   nextBtnText: {
-    fontSize: 16,
+    fontSize: rf(16),
     fontWeight: '800',
     color: '#fff',
     letterSpacing: 0.1,
@@ -652,12 +637,12 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.15)',
   },
   askAIIcon: {
-    fontSize: 16,
+    fontSize: rf(16),
     color: '#fff',
-    lineHeight: 18,
+    lineHeight: rf(18),
   },
   askAIText: {
-    fontSize: 14,
+    fontSize: rf(14),
     fontWeight: '700',
     color: '#fff',
   },

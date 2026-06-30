@@ -10,7 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../../context/AuthContext';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { IS_TABLET, rf, H_PAD, WIN_WIDTH } from '../../utils/responsive';
+import { rf, rs, H_PAD } from '../../utils/responsive';
 
 // ─── Mock user data ────────────────────────────────────────────────────────────
 
@@ -84,17 +84,17 @@ function A11yIcon() {
 
 const iconStyles = StyleSheet.create({
   wrapper: {
-    width: 22,
-    height: 22,
+    width: rs(22),
+    height: rs(22),
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   // Badge / ribbon
   badgeCircle: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
+    width: rs(14),
+    height: rs(14),
+    borderRadius: rs(7),
     borderWidth: 2,
     borderColor: '#fff',
     position: 'absolute',
@@ -103,52 +103,52 @@ const iconStyles = StyleSheet.create({
   ribbonLeft: {
     position: 'absolute',
     bottom: 0,
-    left: 3,
-    width: 7,
-    height: 10,
+    left: rs(3),
+    width: rs(7),
+    height: rs(10),
     backgroundColor: '#fff',
-    borderBottomLeftRadius: 2,
+    borderBottomLeftRadius: rs(2),
     transform: [{ skewX: '-6deg' }],
   },
   ribbonRight: {
     position: 'absolute',
     bottom: 0,
-    right: 3,
-    width: 7,
-    height: 10,
+    right: rs(3),
+    width: rs(7),
+    height: rs(10),
     backgroundColor: '#fff',
-    borderBottomRightRadius: 2,
+    borderBottomRightRadius: rs(2),
     transform: [{ skewX: '6deg' }],
   },
 
   // Gear
   gearOuter: {
-    width: 16,
-    height: 16,
+    width: rs(16),
+    height: rs(16),
     alignItems: 'center',
     justifyContent: 'center',
   },
   gearInner: {
-    width: 7,
-    height: 7,
-    borderRadius: 3.5,
+    width: rs(7),
+    height: rs(7),
+    borderRadius: rs(3.5),
     borderWidth: 2,
     borderColor: '#fff',
   },
   gearTooth: {
     position: 'absolute',
-    width: 3,
-    height: 16,
+    width: rs(3),
+    height: rs(16),
     backgroundColor: '#fff',
-    borderRadius: 1.5,
+    borderRadius: rs(1.5),
     opacity: 0.9,
   },
 
   // Globe
   globeCircle: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
+    width: rs(16),
+    height: rs(16),
+    borderRadius: rs(8),
     borderWidth: 2,
     borderColor: '#fff',
     overflow: 'hidden',
@@ -157,32 +157,32 @@ const iconStyles = StyleSheet.create({
   },
   globeH: {
     position: 'absolute',
-    width: 16,
-    height: 1.5,
+    width: rs(16),
+    height: rs(1.5),
     backgroundColor: '#fff',
   },
   globeV: {
     position: 'absolute',
-    width: 1.5,
-    height: 16,
+    width: rs(1.5),
+    height: rs(16),
     backgroundColor: '#fff',
   },
 
   // Accessibility person
   a11yHead: {
-    width: 7,
-    height: 7,
-    borderRadius: 3.5,
+    width: rs(7),
+    height: rs(7),
+    borderRadius: rs(3.5),
     backgroundColor: '#fff',
     position: 'absolute',
     top: 0,
   },
   a11yBody: {
-    width: 13,
-    height: 13,
+    width: rs(13),
+    height: rs(13),
     borderWidth: 2,
     borderColor: '#fff',
-    borderRadius: 3,
+    borderRadius: rs(3),
     position: 'absolute',
     bottom: 0,
     transform: [{ rotate: '10deg' }],
@@ -204,33 +204,33 @@ function ExitIcon() {
 
 const exitStyles = StyleSheet.create({
   root: {
-    width: 18,
-    height: 18,
+    width: rs(18),
+    height: rs(18),
     alignItems: 'center',
     justifyContent: 'center',
   },
   bracket: {
     position: 'absolute',
     left: 0,
-    width: 2,
-    height: 18,
+    width: rs(2),
+    height: rs(18),
     backgroundColor: 'rgba(255,255,255,0.7)',
     borderRadius: 1,
   },
   arrowShaft: {
     position: 'absolute',
     right: 0,
-    width: 12,
-    height: 2,
+    width: rs(12),
+    height: rs(2),
     backgroundColor: '#fff',
     borderRadius: 1,
   },
   arrowHeadTop: {
     position: 'absolute',
     right: 0,
-    top: 4,
-    width: 7,
-    height: 2,
+    top: rs(4),
+    width: rs(7),
+    height: rs(2),
     backgroundColor: '#fff',
     borderRadius: 1,
     transform: [{ rotate: '45deg' }, { translateX: 1 }],
@@ -238,9 +238,9 @@ const exitStyles = StyleSheet.create({
   arrowHeadBottom: {
     position: 'absolute',
     right: 0,
-    bottom: 4,
-    width: 7,
-    height: 2,
+    bottom: rs(4),
+    width: rs(7),
+    height: rs(2),
     backgroundColor: '#fff',
     borderRadius: 1,
     transform: [{ rotate: '-45deg' }, { translateX: 1 }],
@@ -294,7 +294,6 @@ function MenuRow({ item }: { item: MenuItem }) {
 export function ProfileScreen() {
   const { logout } = useAuth();
   const { top, bottom } = useSafeAreaInsets();
-  const CONTENT_WIDTH = IS_TABLET ? Math.min(WIN_WIDTH * 0.65, 580) : undefined;
 
   return (
     <View style={styles.screen}>
@@ -305,8 +304,6 @@ export function ProfileScreen() {
           {
             paddingTop: top + 32,
             paddingBottom: TAB_BAR_CONTENT_HEIGHT + bottom + 24,
-            width: CONTENT_WIDTH,
-            alignSelf: IS_TABLET ? 'center' : undefined,
           },
         ]}
         showsVerticalScrollIndicator={false}>
@@ -363,7 +360,7 @@ export function ProfileScreen() {
 
 const SCREEN_BG = '#07111C';
 const CARD_BG = '#0C1829';
-const AVATAR_SIZE = 88;
+const AVATAR_SIZE = rs(88);
 
 const styles = StyleSheet.create({
   screen: {
@@ -412,7 +409,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   role: {
-    fontSize: 14,
+    fontSize: rf(14),
     color: 'rgba(255,255,255,0.42)',
     fontWeight: '500',
     textAlign: 'center',
@@ -437,7 +434,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.3,
   },
   statLabel: {
-    fontSize: 9.5,
+    fontSize: rf(9.5),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.35)',
     letterSpacing: 1.4,
@@ -471,9 +468,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   menuIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
+    width: rs(40),
+    height: rs(40),
+    borderRadius: rs(12),
     backgroundColor: 'rgba(255,255,255,0.07)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -490,14 +487,14 @@ const styles = StyleSheet.create({
     letterSpacing: -0.1,
   },
   menuSub: {
-    fontSize: 12.5,
+    fontSize: rf(12.5),
     color: 'rgba(255,255,255,0.4)',
     fontWeight: '500',
   },
   chevron: {
-    fontSize: 22,
+    fontSize: rf(22),
     color: 'rgba(255,255,255,0.28)',
-    lineHeight: 24,
+    lineHeight: rf(24),
     flexShrink: 0,
   },
 
@@ -515,7 +512,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.07)',
   },
   signOutText: {
-    fontSize: 16,
+    fontSize: rf(16),
     fontWeight: '700',
     color: '#fff',
     letterSpacing: 0.1,

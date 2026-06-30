@@ -13,7 +13,7 @@ import { HomeStackParamList } from '../../navigation/HomeStack';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
 import { getLesson, getLessons } from '../../data/lessonData';
-import { rf, H_PAD, WIN_HEIGHT } from '../../utils/responsive';
+import { rf, rs, H_PAD, WIN_HEIGHT } from '../../utils/responsive';
 
 const HERO_H = WIN_HEIGHT * 0.43;
 
@@ -268,9 +268,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   playCircle: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+    width: rs(72),
+    height: rs(72),
+    borderRadius: rs(36),
     backgroundColor: 'rgba(255,255,255,0.90)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -281,9 +281,9 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   playGlyph: {
-    fontSize: 28,
+    fontSize: rf(28),
     color: '#07111C',
-    lineHeight: 30,
+    lineHeight: rf(30),
     marginLeft: 4,
   },
   heroFooter: {
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   categoryChipText: {
-    fontSize: 9,
+    fontSize: rf(9),
     fontWeight: '800',
     color: '#fff',
     letterSpacing: 1,
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.3,
   },
   heroMeta: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '500',
     color: 'rgba(255,255,255,0.55)',
     letterSpacing: 0.4,
@@ -324,9 +324,9 @@ const styles = StyleSheet.create({
   backBtn: {
     position: 'absolute',
     left: 16,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: rs(40),
+    height: rs(40),
+    borderRadius: rs(20),
     backgroundColor: 'rgba(0,0,0,0.55)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -334,9 +334,9 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.18)',
   },
   backArrow: {
-    fontSize: 20,
+    fontSize: rf(20),
     color: '#fff',
-    lineHeight: 22,
+    lineHeight: rf(22),
     marginTop: -1,
   },
 
@@ -369,9 +369,9 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   quizBtnIcon: {
-    fontSize: 16,
+    fontSize: rf(16),
     color: '#fff',
-    lineHeight: 18,
+    lineHeight: rf(18),
   },
   quizBtnText: {
     fontSize: rf(14),
@@ -380,9 +380,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.1,
   },
   iconBtn: {
-    width: 52,
-    height: 52,
-    borderRadius: 14,
+    width: rs(52),
+    height: rs(52),
+    borderRadius: rs(14),
     backgroundColor: 'rgba(255,255,255,0.07)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -390,9 +390,9 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.12)',
   },
   iconGlyph: {
-    fontSize: 19,
+    fontSize: rf(19),
     color: 'rgba(255,255,255,0.82)',
-    lineHeight: 21,
+    lineHeight: rf(21),
   },
 
   // ── Divider ──
@@ -404,7 +404,7 @@ const styles = StyleSheet.create({
 
   // ── Section label ──
   sectionLabel: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.8,
@@ -416,10 +416,10 @@ const styles = StyleSheet.create({
 
   // ── Summary ──
   summaryText: {
-    fontSize: 15,
+    fontSize: rf(15),
     fontWeight: '400',
     color: 'rgba(255,255,255,0.8)',
-    lineHeight: 24,
+    lineHeight: rf(24),
   },
 
   // ── Takeaways ──
@@ -430,9 +430,9 @@ const styles = StyleSheet.create({
     marginBottom: 13,
   },
   checkCircle: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
+    width: rs(22),
+    height: rs(22),
+    borderRadius: rs(11),
     borderWidth: 1.5,
     borderColor: Colors.accent,
     alignItems: 'center',
@@ -441,18 +441,18 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   checkMark: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '800',
     color: Colors.accent,
-    lineHeight: 11,
+    lineHeight: rf(11),
     includeFontPadding: false,
   },
   takeawayText: {
     flex: 1,
-    fontSize: 14,
+    fontSize: rf(14),
     fontWeight: '400',
     color: 'rgba(255,255,255,0.8)',
-    lineHeight: 22,
+    lineHeight: rf(22),
   },
 
   // ── Related lessons ──
@@ -469,18 +469,18 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.07)',
   },
   relatedThumb: {
-    width: 68,
-    height: 68,
-    borderRadius: 10,
+    width: rs(68),
+    height: rs(68),
+    borderRadius: rs(10),
     overflow: 'hidden',
     flexShrink: 0,
     alignItems: 'center',
     justifyContent: 'center',
   },
   relatedThumbPlay: {
-    fontSize: 16,
+    fontSize: rf(16),
     color: 'rgba(255,255,255,0.65)',
-    lineHeight: 18,
+    lineHeight: rf(18),
     marginLeft: 2,
   },
   relatedMeta: {
@@ -488,21 +488,21 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   relatedTitle: {
-    fontSize: 13,
+    fontSize: rf(13),
     fontWeight: '700',
     color: '#fff',
-    lineHeight: 18,
+    lineHeight: rf(18),
     letterSpacing: -0.1,
   },
   relatedSub: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '500',
     color: 'rgba(255,255,255,0.42)',
     letterSpacing: 0.3,
   },
   relatedChevron: {
-    fontSize: 24,
+    fontSize: rf(24),
     color: 'rgba(255,255,255,0.25)',
-    lineHeight: 26,
+    lineHeight: rf(26),
   },
 });

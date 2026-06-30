@@ -17,6 +17,7 @@ import { Button, TextInput } from '../../components/common';
 import { useAuth } from '../../context/AuthContext';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { Colors, Typography } from '../../theme';
+import { rs } from '../../utils/responsive';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = width >= 768 ? width * 0.6 : width * 0.88;
@@ -148,8 +149,8 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   logo: {
-    width: 260,
-    height: 100,
+    width: rs(260),
+    height: rs(100),
   },
   header: {
     marginBottom: 28,

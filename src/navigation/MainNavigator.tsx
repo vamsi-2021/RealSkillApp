@@ -10,16 +10,15 @@ import {
 import { HomeStack } from './HomeStack';
 import { PathStack } from './PathStack';
 import { Colors } from '../theme';
-import { WIN_WIDTH, IS_TABLET } from '../utils/responsive';
+import { IS_TABLET, rf, rs } from '../utils/responsive';
 import { HomeIcon } from '../assets/icons/HomeIcon';
 import { SearchIcon } from '../assets/icons/SearchIcon';
 import { ProgressIcon } from '../assets/icons/ProgressIcon';
 import { PathIcon } from '../assets/icons/PathIcon';
 import { ProfileIcon } from '../assets/icons/ProfileIcon';
 
-// Responsive label font: 9.5px floor (320px phones) → 12px ceiling (tablets)
-const TAB_LABEL_SIZE = Math.min(12, Math.max(9.5, WIN_WIDTH / 36));
-const TAB_ICON_SIZE = IS_TABLET ? 24 : 21;
+const TAB_LABEL_SIZE = rf(13) + (IS_TABLET ? 2 : 0);
+const TAB_ICON_SIZE = rs(23);
 
 // Visible tab-bar content height (excludes safe-area inset)
 export const TAB_BAR_CONTENT_HEIGHT = IS_TABLET ? 72 : 64;

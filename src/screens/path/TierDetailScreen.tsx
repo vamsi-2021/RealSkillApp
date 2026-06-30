@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PathStackParamList } from '../../navigation/PathStack';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
 import { Colors } from '../../theme';
-import { rf, H_PAD } from '../../utils/responsive';
+import { rf, rs, H_PAD } from '../../utils/responsive';
 import { TIERS, LEVEL_COLORS, SubLesson } from '../../data/pathData';
 
 type Props = NativeStackScreenProps<PathStackParamList, 'TierDetail'>;
@@ -32,27 +32,27 @@ function LockIcon() {
 const lockStyles = StyleSheet.create({
   wrapper: { alignItems: 'center' },
   shackle: {
-    width: 10,
-    height: 7,
+    width: rs(10),
+    height: rs(7),
     borderWidth: 2,
     borderColor: 'rgba(255,255,255,0.25)',
     borderBottomWidth: 0,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+    borderTopLeftRadius: rs(5),
+    borderTopRightRadius: rs(5),
     marginBottom: -1,
   },
   body: {
-    width: 17,
-    height: 12,
+    width: rs(17),
+    height: rs(12),
     backgroundColor: 'rgba(255,255,255,0.18)',
-    borderRadius: 3,
+    borderRadius: rs(3),
     alignItems: 'center',
     justifyContent: 'center',
   },
   keyhole: {
-    width: 3.5,
-    height: 3.5,
-    borderRadius: 2,
+    width: rs(3.5),
+    height: rs(3.5),
+    borderRadius: rs(2),
     backgroundColor: 'rgba(0,0,0,0.4)',
   },
 });
@@ -111,9 +111,9 @@ function ShieldIcon() {
 
 const shieldStyles = StyleSheet.create({
   outer: {
-    width: 36,
-    height: 36,
-    borderRadius: 10,
+    width: rs(36),
+    height: rs(36),
+    borderRadius: rs(10),
     backgroundColor: 'rgba(34,197,94,0.12)',
     borderWidth: 1,
     borderColor: 'rgba(34,197,94,0.3)',
@@ -122,19 +122,19 @@ const shieldStyles = StyleSheet.create({
     flexShrink: 0,
   },
   inner: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: rs(20),
+    height: rs(20),
+    borderRadius: rs(10),
     borderWidth: 1.5,
     borderColor: '#22C55E',
     alignItems: 'center',
     justifyContent: 'center',
   },
   check: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '800',
     color: '#22C55E',
-    lineHeight: 11,
+    lineHeight: rf(11),
     includeFontPadding: false,
   },
 });
@@ -274,9 +274,9 @@ const styles = StyleSheet.create({
   backBtn: {
     position: 'absolute',
     left: 16,
-    width: 38,
-    height: 38,
-    borderRadius: 19,
+    width: rs(38),
+    height: rs(38),
+    borderRadius: rs(19),
     backgroundColor: 'rgba(0,0,0,0.45)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -284,9 +284,9 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.15)',
   },
   backArrow: {
-    fontSize: 20,
+    fontSize: rf(20),
     color: '#fff',
-    lineHeight: 22,
+    lineHeight: rf(22),
     marginTop: -1,
   },
 
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   tierBreadcrumb: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '700',
     letterSpacing: 1.6,
   },
@@ -314,15 +314,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   sectionDescription: {
-    fontSize: 14,
+    fontSize: rf(14),
     fontWeight: '400',
     color: 'rgba(255,255,255,0.55)',
-    lineHeight: 22,
+    lineHeight: rf(22),
   },
   completedBadge: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+    width: rs(52),
+    height: rs(52),
+    borderRadius: rs(26),
     backgroundColor: Colors.accent,
     alignItems: 'center',
     justifyContent: 'center',
@@ -334,10 +334,10 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   completedCheck: {
-    fontSize: 22,
+    fontSize: rf(22),
     fontWeight: '700',
     color: '#fff',
-    lineHeight: 24,
+    lineHeight: rf(24),
   },
 
   // ── Progress card ──
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   progressLabel: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.4,
@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
     lineHeight: rf(42),
   },
   progressStatus: {
-    fontSize: 14,
+    fontSize: rf(14),
     fontWeight: '700',
   },
   progressTrack: {
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
 
   // ── Lessons ──
   lessonsLabel: {
-    fontSize: 10,
+    fontSize: rf(10),
     fontWeight: '700',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 1.8,
@@ -410,9 +410,9 @@ const styles = StyleSheet.create({
 
   // Left circle
   leftCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: rs(40),
+    height: rs(40),
+    borderRadius: rs(20),
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
@@ -429,10 +429,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.06)',
   },
   leftCheckmark: {
-    fontSize: 16,
+    fontSize: rf(16),
     fontWeight: '700',
     color: '#fff',
-    lineHeight: 18,
+    lineHeight: rf(18),
   },
   leftNumber: {
     fontSize: rf(15),
@@ -467,12 +467,12 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   clockGlyph: {
-    fontSize: 11,
+    fontSize: rf(11),
     color: 'rgba(255,255,255,0.35)',
-    lineHeight: 13,
+    lineHeight: rf(13),
   },
   durationText: {
-    fontSize: 12,
+    fontSize: rf(12),
     fontWeight: '500',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 0.2,
@@ -480,9 +480,9 @@ const styles = StyleSheet.create({
 
   // Right circle
   rightCircle: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: rs(28),
+    height: rs(28),
+    borderRadius: rs(14),
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
@@ -496,16 +496,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   rightCheck: {
-    fontSize: 12,
+    fontSize: rf(12),
     fontWeight: '700',
     color: '#fff',
-    lineHeight: 13,
+    lineHeight: rf(13),
     includeFontPadding: false,
   },
   rightPlay: {
-    fontSize: 9,
+    fontSize: rf(9),
     color: 'rgba(255,255,255,0.45)',
-    lineHeight: 10,
+    lineHeight: rf(10),
     marginLeft: 1,
   },
 
@@ -526,13 +526,13 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   certTitle: {
-    fontSize: 13,
+    fontSize: rf(13),
     fontWeight: '600',
     color: 'rgba(255,255,255,0.82)',
-    lineHeight: 18,
+    lineHeight: rf(18),
   },
   certSub: {
-    fontSize: 11,
+    fontSize: rf(11),
     fontWeight: '400',
     color: 'rgba(255,255,255,0.38)',
     letterSpacing: 0.1,

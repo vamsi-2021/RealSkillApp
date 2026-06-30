@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Colors } from '../../theme/colors';
 import { Typography } from '../../theme/typography';
+import { rf } from '../../utils/responsive';
 
 interface Props extends TextInputProps {
   label: string;
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.error,
   },
   leftIcon: {
-    fontSize: 18,
+    fontSize: rf(18),
     marginRight: 12,
     color: Colors.textMuted,
   },
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: rf(16),
     color: Colors.textPrimary,
     paddingVertical: 0,
   },
@@ -121,10 +122,10 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   eyeIcon: {
-    fontSize: 16,
+    fontSize: rf(16),
   },
   errorText: {
-    fontSize: 12,
+    fontSize: rf(12),
     color: Colors.error,
     marginTop: 2,
   },
