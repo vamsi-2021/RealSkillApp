@@ -10,6 +10,3 @@ const SCALE = isTablet ? 1.4 : Math.min(width / 375, 1.15);
 
 /** Scale a font size to the current screen */
 export const sp = (size: number): number => Math.round(size * SCALE);
-
-/** Scale a layout dimension (width/height/radius) to the current screen */
-export const s = (size: number): number => Math.round(size * SCALE);

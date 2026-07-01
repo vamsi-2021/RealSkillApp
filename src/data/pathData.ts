@@ -31,6 +31,38 @@ export const LEVEL_COLORS: Record<TierLevel, string> = {
   ADVANCED: '#EF4444',
 };
 
+export interface TierStats {
+  totalSections: number;
+  masteredSections: number;
+}
+
+/** Total section count and completed-section count across all tiers. */
+export function getTierStats(tiers: Tier[]): TierStats {
+  const totalSections = tiers.reduce((acc, t) => acc + t.sections.length, 0);
+  const masteredSections = tiers.reduce(
+    (acc, t) => acc + t.sections.filter(s => s.status === 'completed').length,
+    0,
+  );
+  return { totalSections, masteredSections };
+}
+
+/** Finds a tier and one of its sections by id. Throws if either is missing. */
+export function findTierAndSection(
+  tiers: Tier[],
+  tierId: string,
+  sectionId: string,
+): { tier: Tier; section: Section } {
+  const tier = tiers.find(t => t.id === tierId);
+  if (!tier) {
+    throw new Error(`Tier not found: ${tierId}`);
+  }
+  const section = tier.sections.find(s => s.id === sectionId);
+  if (!section) {
+    throw new Error(`Section not found: ${sectionId} in tier ${tierId}`);
+  }
+  return { tier, section };
+}
+
 export const TIERS: Tier[] = [
   {
     id: 't1',

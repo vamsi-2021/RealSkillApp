@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   FlatList,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -10,8 +9,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TAB_BAR_CONTENT_HEIGHT } from '../../navigation/MainNavigator';
-import { Colors } from '../../theme';
-import { rf, rs, H_PAD } from '../../utils/responsive';
+import { styles, magStyles } from './SearchScreen.styles';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -103,28 +101,6 @@ function MagnifyIcon({ color = 'rgba(255,255,255,0.35)' }: { color?: string }) {
   );
 }
 
-const magStyles = StyleSheet.create({
-  root: { width: rs(18), height: rs(18) },
-  circle: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: rs(12),
-    height: rs(12),
-    borderRadius: rs(6),
-    borderWidth: 2,
-  },
-  handle: {
-    position: 'absolute',
-    bottom: 0,
-    right: 1,
-    width: rs(2),
-    height: rs(8),
-    borderRadius: 1,
-    transform: [{ rotate: '-45deg' }],
-  },
-});
-
 // ─── Thumbnail placeholder ────────────────────────────────────────────────────
 
 function Thumbnail({ bg, accent }: { bg: string; accent: string }) {
@@ -138,7 +114,7 @@ function Thumbnail({ bg, accent }: { bg: string; accent: string }) {
 
 // ─── Result card ─────────────────────────────────────────────────────────────
 
-function ResultCard({ item }: { item: SearchItem }) {
+const ResultCard = React.memo(function ResultCard({ item }: { item: SearchItem }) {
   return (
     <TouchableOpacity activeOpacity={0.75} style={styles.card}>
       <Thumbnail bg={item.thumbBg} accent={item.thumbAccent} />
@@ -152,7 +128,7 @@ function ResultCard({ item }: { item: SearchItem }) {
       </View>
     </TouchableOpacity>
   );
-}
+});
 
 // ─── SearchScreen ─────────────────────────────────────────────────────────────
 
@@ -180,6 +156,11 @@ export function SearchScreen() {
 
   const sectionLabel =
     query.trim() ? `RESULTS FOR "${query.trim().toUpperCase()}"` : 'TRENDING IN YOUR SHOP';
+
+  const renderItem = useCallback(
+    ({ item }: { item: SearchItem }) => <ResultCard item={item} />,
+    [],
+  );
 
   return (
     <View style={styles.screen}>
@@ -236,7 +217,7 @@ export function SearchScreen() {
       <FlatList
         data={results}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <ResultCard item={item} />}
+        renderItem={renderItem}
         contentContainerStyle={[
           styles.list,
           {
@@ -263,178 +244,3 @@ export function SearchScreen() {
   );
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
-
-const SCREEN_BG = '#07111C';
-const CARD_BG = '#0C1829';
-const THUMB_SIZE = rs(76);
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: SCREEN_BG,
-  },
-
-  // ── Sticky header ──
-  stickyHeader: {
-    paddingHorizontal: H_PAD,
-    paddingBottom: 12,
-    backgroundColor: SCREEN_BG,
-  },
-  pageTitle: {
-    fontSize: rf(28),
-    fontWeight: '800',
-    color: '#fff',
-    letterSpacing: -0.4,
-    marginBottom: 16,
-  },
-
-  // ── Search bar ──
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    backgroundColor: 'rgba(255,255,255,0.07)',
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    paddingVertical: 13,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(255,255,255,0.08)',
-    marginBottom: 14,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: rf(15),
-    color: '#fff',
-    padding: 0,
-    margin: 0,
-  },
-
-  // ── Filter chips ──
-  filtersScroll: {
-    marginHorizontal: -H_PAD,
-  },
-  filtersRow: {
-    paddingHorizontal: H_PAD,
-    gap: 8,
-    flexDirection: 'row',
-  },
-  chip: {
-    paddingHorizontal: 18,
-    paddingVertical: 9,
-    borderRadius: 22,
-    borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.15)',
-    backgroundColor: 'transparent',
-  },
-  chipActive: {
-    backgroundColor: Colors.accent,
-    borderColor: Colors.accent,
-  },
-  chipText: {
-    fontSize: rf(13),
-    fontWeight: '600',
-    color: 'rgba(255,255,255,0.7)',
-    letterSpacing: 0.1,
-  },
-  chipTextActive: {
-    color: '#fff',
-  },
-
-  // ── List ──
-  list: {
-    paddingHorizontal: H_PAD,
-    paddingTop: 6,
-    gap: 10,
-  },
-  sectionLabel: {
-    fontSize: rf(10),
-    fontWeight: '700',
-    color: 'rgba(255,255,255,0.38)',
-    letterSpacing: 1.8,
-    marginBottom: 12,
-    marginTop: 4,
-  },
-
-  // ── Card ──
-  card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 14,
-    backgroundColor: CARD_BG,
-    borderRadius: 16,
-    padding: 12,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(255,255,255,0.07)',
-    marginBottom: 2,
-  },
-
-  // ── Thumbnail ──
-  thumb: {
-    width: THUMB_SIZE,
-    height: THUMB_SIZE,
-    borderRadius: 10,
-    overflow: 'hidden',
-    flexShrink: 0,
-  },
-  thumbAccent: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: THUMB_SIZE * 0.6,
-    opacity: 0.7,
-    borderTopRightRadius: THUMB_SIZE,
-  },
-  thumbShimmer: {
-    position: 'absolute',
-    top: 8,
-    left: 8,
-    width: THUMB_SIZE * 0.3,
-    height: THUMB_SIZE * 0.3,
-    borderRadius: THUMB_SIZE * 0.15,
-    backgroundColor: 'rgba(255,255,255,0.06)',
-  },
-
-  // ── Card body ──
-  cardBody: {
-    flex: 1,
-    gap: 6,
-    justifyContent: 'center',
-  },
-  cardTitle: {
-    fontSize: rf(15),
-    fontWeight: '700',
-    color: '#fff',
-    letterSpacing: -0.1,
-    lineHeight: 21,
-  },
-  cardMeta: {
-    fontSize: rf(10.5),
-    fontWeight: '600',
-    color: 'rgba(255,255,255,0.38)',
-    letterSpacing: 0.6,
-  },
-
-  // ── Empty state ──
-  emptyState: {
-    alignItems: 'center',
-    paddingTop: 60,
-    gap: 10,
-  },
-  emptyIcon: {
-    fontSize: rf(40),
-    color: 'rgba(255,255,255,0.15)',
-  },
-  emptyTitle: {
-    fontSize: rf(17),
-    fontWeight: '700',
-    color: 'rgba(255,255,255,0.4)',
-  },
-  emptyBody: {
-    fontSize: rf(14),
-    color: 'rgba(255,255,255,0.25)',
-    textAlign: 'center',
-    paddingHorizontal: 40,
-  },
-});

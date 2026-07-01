@@ -1,2 +1,14 @@
 export { Button } from './Button';
 export { TextInput } from './TextInput';
+export { CircleIconButton } from './CircleIconButton';
+export { LockIcon } from './LockIcon';
+export { StatusCircle } from './StatusCircle';
+export { ProgressBar } from './ProgressBar';
+export { EyebrowLabel } from './EyebrowLabel';
+export { StatCard } from './StatCard';
+export type { CircleIconButtonProps } from './CircleIconButton';
+export type { LockIconProps } from './LockIcon';
+export type { StatusCircleProps } from './StatusCircle';
+export type { ProgressBarProps } from './ProgressBar';
+export type { EyebrowLabelProps } from './EyebrowLabel';
+export type { StatCardProps } from './StatCard';
